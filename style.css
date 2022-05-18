@@ -1,0 +1,103 @@
+body {
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.mainContainer, .scoreboard, .jobs, .input, .menuButton, .columns {
+    border-style: solid;
+    border-color: red;
+    border-width: 1px;
+}
+
+.mainContainer {
+    height: 800px;
+    width: 600px;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
+}
+
+.scoreboard { 
+    height: 80px;
+    width: 500px;
+}
+
+.status, .questionsAnswered, .money {
+    height: 20px;
+    font-size: 20px;
+    line-height: 20px;
+    margin-left: 5px;
+    margin-top: 5px;
+}
+
+.input {
+    height: 60px;
+    width: 300px;
+    font-size: 60px;
+    line-height: 60px;
+    text-align: right;
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.jobs {
+    position: relative;
+}
+.jobcontainer{
+    position: relative;
+    height: 50px;
+    width: 300px;
+    margin: 10px;
+}
+
+.l,.r {
+    font-size: 15px;
+    line-height: 15px;
+    margin-top: 5px;
+    float: left;
+    margin-left: 5px;
+}
+
+.bar {
+    height: 100%;
+    width: 300px;
+    background-color: grey;
+    position: absolute;
+    z-index: 0;
+}
+
+.progress {
+    position: absolute;
+    background-color: palegreen;
+    width: 300px;
+    height: 100%;
+    z-index: 0;
+}
+
+.question {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    text-align: right;
+    line-height: 25px;
+    z-index: 1;
+    font-size: 25px;
+}
+
+.columns {
+    width: 90%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.menuButton {
+    height: 50px;
+    width: 100px;
+    margin-bottom: 100px;
+}
