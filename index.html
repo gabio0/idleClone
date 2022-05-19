@@ -5,37 +5,38 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>Idle Clone Math</title>
+    <title>Idle Math</title>
 </head>
 <body>
     <div class="main-container">
         <div class="scoreboard">
-            <div class="status">You are a: POOR</div>
+            <div class="status">You are a: POOR with 0 status</div>
             <div class="questions-answered">Questions Answered: 0</div>
-            <div class="money">Money: $0</div>
+            <span class="money">Money: $0</span>
+            <span class="money-seconds">$0/second</span>
         </div>
         <div class="input">0</div>
         <div class="columns">
             <div class="columnLeft">
                 <ul>
-                    <li class="menu-button">Status Points</li>
-                    <li class="menu-button">Hire Peons</li>
-                    <li class="menu-button">Reset Upgrades</li>
+                    <li class="menu-button">Status Points<br>Q</li>
+                    <li class="menu-button">Hire Peons<br>W</li>
+                    <li class="menu-button">Reset Upgrades<br>E</li>
                 </ul>
             </div>
             <div class="columnRight">
                 <div class="jobs">
                     <ul>
-                        <div class="job-container"><li class="bar"><div class="progress" id="aProgress"></div></li><div class=question id="a"><span class="l">$1 Burger-Flipper</span><span class=r></span></div></div>
-                        <div class="job-container"><li class="bar"><div class="progress" id="sProgress"></div></li><div class=question id="s"><span class="l">$2 Waitress</span><span class=r></span></div></div>
-                        <div class="job-container"><li class="bar"><div class="progress" id="dProgress"></div></li><div class=question id="d"><span class="l">$5 Garbageman</span><span class=r></span></div></div>
-                        <div class="job-container"><li class="bar"><div class="progress" id="fProgress"></div></li><div class=question id="f"><span class="l">$10 Teacher</span><span class=r></span></div></div>
-                        <div class="job-container"><li class="bar"><div class="progress" id="gProgress"></div></li><div class=question id="g"><span class="l">$20 Firefigher</span><span class=r></span></div></div>
-                        <div class="job-container"><li class="bar"><div class="progress" id="zProgress"></div></li><div class=question id="z"><span class="l">$50 Lawyer</span><span class=r></span></div></div>
-                        <div class="job-container"><li class="bar"><div class="progress" id="xProgress"></div></li><div class=question id="x"><span class="l">$100 Doctor</span><span class=r></span></div></div>
-                        <div class="job-container"><li class="bar"><div class="progress" id="cProgress"></div></li><div class=question id="c"><span class="l">$250 Programmer</span><span class=r></span></div></div>
-                        <div class="job-container"><li class="bar"><div class="progress" id="vProgress"></div></li><div class=question id="v"><span class="l">$500 Politician</span><span class=r></span></div></div>
-                        <div class="job-container"><li class="bar"><div class="progress" id="bProgress"></div></li><div class=question id="b"><span class="l">$1000 Oligarch</span><span class=r></span></div></div>
+                        <div class="job-container"><li class="bar"><div class="progress" id="aProgress"></div></li><div class=question id="a"><span class="l">$1 Troll Poop Cleaner</span><span class=r></span></div></div>
+                        <div class="job-container"><li class="bar"><div class="progress" id="sProgress"></div></li><div class=question id="s"><span class="l">$2 Narwhal Breeder</span><span class=r></span></div></div>
+                        <div class="job-container"><li class="bar"><div class="progress" id="dProgress"></div></li><div class=question id="d"><span class="l">$5 Dragon Groomer</span><span class=r></span></div></div>
+                        <div class="job-container"><li class="bar"><div class="progress" id="fProgress"></div></li><div class=question id="f"><span class="l">$10 Magical Zoologist</span><span class=r></span></div></div>
+                        <div class="job-container"><li class="bar"><div class="progress" id="gProgress"></div></li><div class=question id="g"><span class="l">$20 Hydra Slayer</span><span class=r></span></div></div>
+                        <div class="job-container"><li class="bar"><div class="progress" id="zProgress"></div></li><div class=question id="z"><span class="l">$50 Wildcat Trainer</span><span class=r></span></div></div>
+                        <div class="job-container"><li class="bar"><div class="progress" id="xProgress"></div></li><div class=question id="x"><span class="l">$100 Alchemist</span><span class=r></span></div></div>
+                        <div class="job-container"><li class="bar"><div class="progress" id="cProgress"></div></li><div class=question id="c"><span class="l">$250 Wizard</span><span class=r></span></div></div>
+                        <div class="job-container"><li class="bar"><div class="progress" id="vProgress"></div></li><div class=question id="v"><span class="l">$500 White Mage</span><span class=r></span></div></div>
+                        <div class="job-container"><li class="bar"><div class="progress" id="bProgress"></div></li><div class=question id="b"><span class="l">$1000 Unicorn Rider</span><span class=r></span></div></div>
                     </ul>
                 </div>
             </div>
