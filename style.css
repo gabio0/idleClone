@@ -108,6 +108,32 @@ ul {
     justify-content: space-around;
 }
 
+.reset {
+    position: absolute;
+    text-align: center;
+    width: 320px;
+    height: 630px;
+    opacity: 0;
+}
+
+.reset-button { 
+    margin-left: 100px;
+    margin-right: 100px;
+    margin-bottom: 250px;
+    height: 100px;
+    width: 120px;
+    text-align: center;
+    background: radial-gradient(#a22, #F00);
+    line-height: 34px;
+    font-size: 25px;
+}
+
+.reset-text {
+    width: 300px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
 .menu-button {
     width: 100px;
     margin-bottom: 100px;

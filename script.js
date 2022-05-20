@@ -8,6 +8,11 @@ const money = document.querySelector(".money")
 const questionsAnswered = document.querySelector(".questions-answered")
 const displayMoneySeconds = document.querySelector(".money-seconds")
 const displayStatus = document.querySelector(".status")
+const columnRight = document.querySelector(".column-right")
+const resetMenu = document.querySelector('.reset')
+const hideJobs = document.querySelector('.jobs')
+const resetText = document.querySelector('.reset-text')
+let columnRightContentStorage = ''
 /*progress elements get a bool to check if it's loading (can't answer problems
 if it's still loading) and a loadingTime variable to tell it how long to load*/
 progress.forEach((e) => e.isProgressRunning = false)
@@ -16,12 +21,12 @@ $/question answered (payday) and job title*/
 const operatorList = ['+','-','+','-','*','/','+','-','*','/']
 const loadingTime = [17, 29, 49, 84, 142, 241, 410, 698, 1186, 2016]
 const operandMax = [5,5,25,25,5,5,100,100,10,10]
-const payday = [1,2,5,10,20,50,100,250,500,1000]
+const payday = [1,2,5,10,25,75,200,450,1000,5000]
 const job = ['Troll Poop cleaner','Narwhal Breeder','Dragon Groomer','Magical Zoologist','Hydra Slayer', 'Wildcat Trainer','Alchemist','Wizard','White Mage','Unicorn Rider']
 const selector = ['A','S','D','F','G','Z','X','C','V','B']
 const peonBaseCosts = [10,50,200,1000,3500,10000,50000,300000,2000000,10000000]
 const peonNames = ['Hobo Temp A','Little Girl S','Fan Boy D','Scientist F','Knight G','Tank Z','Insane Old Guy X','Creepy Hag C','Best Friend V','Master B']
-const statusItem = ['Hair Cut A', 'New Shoes S', 'Hire Maid F', 'New Car D', 'Fly First Class G', 'Hire Chocolatier Z', 'Live-in Nanny X', 'Beach House C', 'Name a Library V', 'Tophat & Monocle B']
+const statusItem = ['Hair Cut A', 'New Shoes S', 'Hire Maid D', 'New Car F', 'Fly First Class G', 'Hire Chocolatier Z', 'Live-in Nanny X', 'Beach House C', 'Name a Library V', 'Tophat & Monocle B']
 const statusCost = [30,150,500,2000,7500,18000,50000,500000,3000000,10000000]
 const statusPointValue = [1,4,9,16,25,37,50,65,82,99]
 let inHireMenu = false
@@ -30,25 +35,26 @@ let inResetMenu = false
 let moneyPerSecond = 0
 let statusPoints = 0
 let isMoneyPerSecondRunning = false;
+let unicornSpirits = 0
+let seconds
 
 //loading additional element attributes
-for(let i=0;i<progress.length;i++) {
-    progress[i].loadingTime = loadingTime[i]
-}
-
-for(let i=0;i<question.length;i++) {
-    question[i].operator = operatorList[i]
-    question[i].operandMax = operandMax[i]
-    question[i].selector = selector[i]
-    question[i].payday = payday[i]
-    question[i].job = job[i]
-    question[i].countHired = 0;
-    question[i].peonCost = peonBaseCosts[i]
-    question[i].peonName = peonNames[i]
-    question[i].statusItem = statusItem[i]
-    question[i].statusCost = statusCost[i]
-    question[i].statusPointValue = statusPointValue[i]
-    question[i].children[1].textContent += generateQuestion(question[i])
+function resetElementAttributes(){
+    for(let i=0;i<question.length;i++) {
+        question[i].operator = operatorList[i]
+        question[i].operandMax = operandMax[i]
+        question[i].selector = selector[i]
+        question[i].payday = payday[i] * (1+(unicornSpirits/10))
+        question[i].job = job[i]
+        question[i].countHired = 0;
+        question[i].peonCost = peonBaseCosts[i]
+        question[i].peonName = peonNames[i]
+        question[i].statusItem = statusItem[i]
+        question[i].statusCost = statusCost[i]
+        question[i].statusPointValue = statusPointValue[i]
+        question[i].children[1].textContent += generateQuestion(question[i])
+        progress[i].loadingTime = loadingTime[i]
+    }
 }
 
 function progressBar(element) {
@@ -96,6 +102,7 @@ function updateScore(element) {
     const tempArray = questionsAnswered.textContent.split(" ")
     a = parseFloat(tempArray[2]) + 1
     b = getDisplayMoney() + parseFloat(element.payday)
+    unicornSpirits++
     questionsAnswered.textContent = 'Questions Answered: ' + a
     setDisplayMoney(b)
 }
@@ -125,7 +132,12 @@ function backToMainScreen() {
 }
 
 function openHireMenu() {
-    inHireMenu = !inHireMenu;
+    inHireMenu = !inHireMenu
+    inStatusMenu = false
+    if(inResetMenu) {
+        openResetMenu()
+        openHireMenu()
+    }
     if(inHireMenu){
         input.style = 'font-size: 31px;'
         input.textContent = 'Hire Some Peons!'
@@ -138,23 +150,47 @@ function openHireMenu() {
 
 function openStatusMenu() {
     inStatusMenu = !inStatusMenu
+    inHireMenu = false
+    if(inResetMenu) {
+        openResetMenu()
+        openStatusMenu()
+    }
     if(inStatusMenu) {
         input.style = 'font-size: 31px;'
         input.textContent = 'Be Cooler!'
         for(let i=0;i<question.length;i++) {
             question[i].children[0].textContent = `Cost $${question[i].statusCost} for a`
             question[i].children[1].textContent = question[i].statusItem
+            console.log('test')
         }
     } else backToMainScreen()
+}
+
+function openResetMenu() {
+    inResetMenu = !inResetMenu
+    inStatusMenu = false
+    inHireMenu = false
+    input.style = 'font-size: 26px;'
+    input.textContent = 'Permanent Upgrades!'
+    resetText.textContent = `Reset all your money, status, and hired peons in exchange for ${unicornSpirits} Unicorn Spirits?`
+    if(inResetMenu) {
+        hideJobs.style = 'opacity: 0;'
+        resetMenu.style = 'opacity: 1;'
+    } else {
+        hideJobs.style = 'opacity: 1;'
+        resetMenu.style = 'opacity: 0;'
+        backToMainScreen()
+    }
 }
 
 function updateMoneyPerSecond(){
     if(isMoneyPerSecondRunning) clearInterval(seconds)
     let a = 0;
     for(let i=0;i<question.length;i++){
-        a += question[i].countHired / (progress[i].loadingTime * .3)
+        a += (question[i].countHired * question[i].payday) / (progress[i].loadingTime * .3)
     }
     moneyPerSecond = a.toFixed(2)
+    unicornSpirits++
     seconds = setInterval(moneySeconds, 1000)
     function moneySeconds() {
         isMoneyPerSecondRunning = true;
@@ -202,13 +238,24 @@ function someoneHired(entry) {
 function statusPurchase(entry) {
     const selectedQuestion = document.getElementById(entry)
     if(canIAfford(selectedQuestion.statusCost)){
+        unicornSpirits++
         adjustDisplayMoney(selectedQuestion.statusCost)
         selectedQuestion.statusCost = (selectedQuestion.statusCost * 1.5).toFixed(2)
+        selectedQuestion.children[0].textContent = `Cost $${selectedQuestion.statusCost} for a`
         statusPoints += selectedQuestion.statusPointValue
         displayStatus.textContent = `You are a: POOR with ${statusPoints} status`
-        updateMoneyPerSecond()
     }
 }
+
+function resetPurchase(entry) {
+    setDisplayMoney(0)
+    questionsAnswered.textContent = 'Questions Answered: 0'
+    displayStatus.textContent = "You are a: POOR with 0 Status"
+    resetElementAttributes()
+    updateMoneyPerSecond()
+}
+
+resetElementAttributes()
 
 window.addEventListener('keydown', (e) => {
     const a = e.key.toLowerCase();
@@ -222,8 +269,10 @@ window.addEventListener('keydown', (e) => {
         else if(inResetMenu) resetPurchase(a)
         else questionSelected(a)
     }
+    if('rR'.includes(a) && inResetMenu) resetPurchase(a)
     if(a === 'w') openHireMenu()
     if(a === 'q') openStatusMenu()
+    if(a === 'e') openResetMenu()
 })
 
-question.forEach(e => e.onclick = function() {questionSelected(e.selector)})
+//question.forEach(e => e.onclick = function() {questionSelected(e.selector)})q
